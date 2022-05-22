@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 
 var tabs = function tabs(headerSelector, tabSelector, contentSelector, activeClass) {
+  var display = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'block';
   var tabsHeader = document.querySelector(headerSelector),
       tabs = document.querySelectorAll(tabSelector),
       tabsContent = document.querySelectorAll(contentSelector);
@@ -21,7 +22,7 @@ var tabs = function tabs(headerSelector, tabSelector, contentSelector, activeCla
 
   function showTabContent() {
     var i = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-    tabsContent[i].style.display = 'block';
+    tabsContent[i].style.display = display;
     tabs[i].classList.add(activeClass);
   }
 
