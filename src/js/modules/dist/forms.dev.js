@@ -5,15 +5,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var forms = function forms() {
+var _checkNumInputs = _interopRequireDefault(require("./checkNumInputs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var forms = function forms(state) {
   var form = document.querySelectorAll('form'),
-      inputs = document.querySelectorAll('input'),
-      phoneInputs = document.querySelectorAll('input[name="user_phone"]');
-  phoneInputs.forEach(function (item) {
-    item.addEventListener("input", function () {
-      item.value = item.value.replace(/\D/, '');
-    });
-  });
+      inputs = document.querySelectorAll('input');
+  (0, _checkNumInputs["default"])('input[name="user_phone"]');
   var message = {
     loading: 'Загрузка...',
     success: 'Форма отправлена',
@@ -56,6 +55,13 @@ var forms = function forms() {
       statusMessage.classList.add('status');
       item.appendChild(statusMessage);
       var formData = new FormData(item);
+
+      if (form.getAttribute('data-calc') === 'end') {
+        for (var key in state) {
+          formData.append(key, state[key]);
+        }
+      }
+
       postData('assets/server.php', formData).then(function (res) {
         console.log(res);
         statusMessage.textContent = message.success;
