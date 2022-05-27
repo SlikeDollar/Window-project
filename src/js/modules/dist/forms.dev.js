@@ -56,7 +56,7 @@ var forms = function forms(state) {
       item.appendChild(statusMessage);
       var formData = new FormData(item);
 
-      if (form.getAttribute('data-calc') === 'end') {
+      if (item.getAttribute('data-calc') === 'end') {
         for (var key in state) {
           formData.append(key, state[key]);
         }
@@ -72,6 +72,13 @@ var forms = function forms(state) {
         inputs.forEach(function (item) {
           return item.value = '';
         });
+
+        for (var _key in state) {
+          if (_key == 'width' || _key == 'height') {
+            delete state[_key];
+          }
+        }
+
         setTimeout(function () {
           statusMessage.remove();
         }, 3000);

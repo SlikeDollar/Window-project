@@ -7,7 +7,7 @@ exports["default"] = void 0;
 
 var _function = require("core-js/core/function");
 
-var modals = function modals() {
+var modals = function modals(state) {
   function bindModal(triggerSelector, modalSelector, closeBtn) {
     var closeClickOverlay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
     var trigger = document.querySelectorAll(triggerSelector),
@@ -15,16 +15,41 @@ var modals = function modals() {
         close = document.querySelector(closeBtn),
         windows = document.querySelectorAll('[data-modal]');
     trigger.forEach(function (item) {
-      item.addEventListener('click', function (event) {
-        if (event.target) {
-          event.preventDefault();
+      item.addEventListener('click', function (e) {
+        if (e.target) {
+          e.preventDefault();
         }
 
-        windows.forEach(function (item) {
-          item.style.display = 'none';
-        });
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
+        showModal();
+
+        function showModal() {
+          modal.style.display = 'block';
+          document.body.style.overflow = "hidden";
+        }
+
+        function hideModals() {
+          windows.forEach(function (item) {
+            item.style.display = 'none';
+          });
+        }
+
+        if (item.classList.contains('popup_calc_button')) {
+          if (!state.width || !state.height) {
+            modal.style.display = 'none';
+          } else {
+            hideModals();
+            showModal();
+          }
+        }
+
+        if (item.classList.contains('popup_calc_profile_button')) {
+          if (!state.profile) {
+            modal.style.display = 'none';
+          } else {
+            hideModals();
+            showModal();
+          }
+        }
       });
     });
     close.addEventListener('click', function () {

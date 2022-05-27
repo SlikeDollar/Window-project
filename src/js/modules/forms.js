@@ -32,7 +32,7 @@ const forms = (state) => {
             item.appendChild(statusMessage);
 
             const formData = new FormData(item);
-            if(form.getAttribute('data-calc') === 'end') {
+            if(item.getAttribute('data-calc') === 'end') {
                 for (let key in state) {
                     formData.append(key, state[key]);
                 }
@@ -47,6 +47,11 @@ const forms = (state) => {
                 throw error;
             }).finally(() => {
                 inputs.forEach(item => item.value = '');
+                for (let key in state) {
+                    if (key == 'width' || key == 'height') {
+                        delete state[key];
+                    }
+                }
                 setTimeout(() => {
                     statusMessage.remove();
                 }, 3000);
