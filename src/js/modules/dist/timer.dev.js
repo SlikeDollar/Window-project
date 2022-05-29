@@ -39,6 +39,7 @@ var timer = function timer(id, deadline) {
         timeInterval = setInterval(function () {
       updateClock();
     }, 1000);
+    updateClock();
 
     function updateClock() {
       var t = getTimeRemaining(endtime);
