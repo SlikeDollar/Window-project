@@ -4,6 +4,7 @@ const images = () => {
           bigImage = document.createElement('img');
     
     imgPopup.classList.add('popup');
+    bigImage.classList.add('img--big');
     workSection.appendChild(imgPopup);
 
     imgPopup.style.justifyContent = 'center';
@@ -21,6 +22,12 @@ const images = () => {
             imgPopup.style.display = 'flex';
             const path = target.parentNode.getAttribute('href');
             bigImage.setAttribute('src', path);
+            document.body.style.overflow = 'hidden';
+        }
+
+        if(target && target.matches('div.popup')) {
+            imgPopup.style.display = 'none';
+            document.body.style.overflow = '';
         }
     });
 };

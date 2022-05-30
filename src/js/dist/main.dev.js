@@ -12,6 +12,8 @@ var _changeModalState = _interopRequireDefault(require("./modules/changeModalSta
 
 var _timer = _interopRequireDefault(require("./modules/timer"));
 
+var _images = _interopRequireDefault(require("./modules/images"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -29,4 +31,5 @@ window.addEventListener("DOMContentLoaded", function () {
   (0, _tabs["default"])('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline-block');
   (0, _forms["default"])(modalState);
   (0, _timer["default"])('.container1', deadline);
+  (0, _images["default"])();
 });
